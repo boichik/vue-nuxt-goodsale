@@ -1,0 +1,338 @@
+@mixin fRaleway($fontF,$fontS, $fontW, $fontH){
+font-family: $fontF, sans-serif;
+font-style: normal;
+font-weight: $fontW;
+font-size: $fontS;
+line-height: $fontH;
+}
+
+.container{
+position: relative;
+max-width:1346px;
+margin: 88px auto;
+
+.pagination{
+    padding: 0;
+    margin-top: 50px;
+    list-style: none;
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+
+    &__page-item{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #363D41;
+    margin-right: 29px;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #363D41;
+    a{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+    &:hover{
+        background: #CC9966;
+        color:white;
+        border-color: #CC9966;
+    }
+    &.active{
+        background: #CC9966;
+        color:white;
+        border-color: #CC9966;
+    }
+    &.disabled{
+        a{
+        cursor: default;
+        }
+        color: #C4C4C4;
+        border-color: #C4C4C4;
+        &:hover{
+        background: transparent;
+        color: #C4C4C4;
+        border-color: #C4C4C4;
+        }
+    }
+
+    &.prev,&.next{
+        width: 90px;
+    }
+    &.next{
+        margin-right: 0;
+    }
+    }
+}
+
+
+.list{
+    display: flex;
+    flex-direction: column;
+    &.detail{
+        height: 100%;
+        .item{
+            height: 100%;
+            &-photo{
+                width: 25%;
+            }
+            &-info{
+                width: 75%;
+            }
+        }
+    }
+    .item{
+    &:last-child{
+        margin-bottom: 0;
+    }
+    margin-bottom: 35px;
+    width: 100%;
+    height: 360px;
+
+    display: flex;
+    &-title-mobile{
+        display: none;
+        width: 100%;
+        @include fRaleway('Montserrat',18px, 800, 30px);
+    }
+    &-photo{
+        width: 200px;
+        height: 100%;
+        img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
+    }
+    &-info{
+        width: calc(100% - 200px);
+        border-top: 1px solid #E5E5E5;
+        border-right: 1px solid #E5E5E5;
+        border-bottom: 1px solid #E5E5E5;
+        padding: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-between;
+
+        &__title{
+        @include fRaleway('Montserrat',18px, 800, 30px);
+        width: 100%;
+        }
+        &__prices{
+        display: flex;
+        justify-content: flex-start;
+        .price{
+            display: flex;
+            height: fit-content;
+            svg{
+            align-self: center;
+            path{
+                fill:#CC9966;
+            }
+            }
+            p{
+            @include fRaleway('Raleway',16px, bold, 20px);
+            margin-left: 10px;
+            }
+        }
+
+        .price.new-price{
+            margin-right: 15px;
+            svg path{
+            fill:#6C6C6C;
+            }
+            p{
+            @include fRaleway('Raleway',12px, normal, 20px);
+            color:#6C6C6C;
+            position: relative;
+            &::before{
+                content:'';
+                position: absolute;
+                width: 100%;
+                border-bottom: 1px solid;
+                transform: translateY(10px);
+            }
+            }
+        }
+        }
+        &__description{
+        @include fRaleway('Raleway',14px, normal, 20px);
+        color: #363D41;
+        }
+        &__category{
+        align-self: flex-end;
+        display: flex;
+        svg{
+            margin-right: 8px;
+            path{
+                fill:#CC9966;
+            }
+        }
+        a{
+            @include fRaleway('Raleway',12px, normal, 20px);
+            text-decoration: none;
+            color: #6C6C6C;
+            margin: 0 3px;
+            align-self: flex-end;
+            transition: 0.3s;
+            &:hover{
+            color:#000000;
+            }
+        }
+        }
+        &__link{
+        align-self: flex-end;
+        display: flex;
+        text-decoration: none;
+        &:hover{
+            .line{
+            background: #6d7276;
+            }
+            p{
+            color:#6d7276;
+            }
+        }
+        .line{
+            width: 40px;
+            height: 3.33px;
+            background:#363D41;
+            align-self: center;
+            margin-right: 15px;
+            transition: 0.3s;
+        }
+        p{
+            @include fRaleway('Montserrat',12px, 800, 15px);
+            color: #363D41;
+            transition: 0.3s;
+        }
+        }
+    }
+
+    }
+}
+
+}
+@media (max-width:1345px){
+.container{
+    .list{
+        .item{
+            margin: 0 auto 35px auto;
+            width: 95%;
+            &-photo{
+            width: 20%;
+            }
+            &-info{
+            width: 80%;
+            }
+        }
+    }
+}
+}
+@media(max-width:768px){
+.container{
+    margin: 18px auto;
+    .list{
+        &.detail{
+            .item{
+                &-info,
+                &-photo{
+                    width: 100%;
+                }
+            }
+        }
+        .item{
+            height: auto;
+            margin-bottom: 16px;
+            flex-direction: column;
+            &-title-mobile{
+            display: block;
+            }
+            &-photo{
+            width: 100%;
+            height: 158px;
+            margin: 16px 0;
+            }
+            &-info{
+            width: 100%;
+            border-right: none;
+            border-top: none;
+            padding: 0;
+            &__title{display: none;}
+
+            &__link{
+                margin-bottom: 16px;
+                order:4;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            &__category{order:1; width: 100%; margin-bottom: 20px;}
+            &__prices{order:2; width: 100%;}
+            &__description{order:3; margin: 14px 0 20px 0;}
+
+            }
+        }
+    }
+}
+}
+@media(max-width:480px){
+.container{
+    .pagination{
+    margin-top: 27px;
+    margin-bottom: 105px;
+    
+
+    &__page-item{
+        width: 25px;
+        height: 25px;
+        margin-right: 12px;
+
+        &.prev,&.next{
+        width: 70px;
+        }
+
+    }
+    }
+}
+}
+@media(max-width:375px){
+.container{
+    .list{
+    .item{
+        &-title-mobile{
+            @include fRaleway('Montserrat',16px, 800, 20px);
+        }
+        &-info{
+        &__category{
+            @include fRaleway('Raleway',12px, normal, 20px);
+        }
+        &__prices{
+            .price{
+            p{
+                @include fRaleway('Raleway',14px, bold, 20px);
+            }
+            }
+        }
+        &__description{
+            @include fRaleway('Raleway',12px, normal, 18px);
+        }
+        &__link{
+            .line{
+            width:20px;
+            height: 2px;
+            }
+            p{
+            @include fRaleway('Montserrat',12px, 800, 15px);
+            }
+        }
+        }
+    }
+    }
+}
+}
